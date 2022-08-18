@@ -10,10 +10,10 @@ class ClaimsRepository:
         response = table.scan()
         return response.get('Items', [])
 
-    def get_claim(self, uid: str):
+    def get_claim(self, id: str):
         try:
             table = self.__db.Table('Claims')
-            response = table.get_item(Key={'uid': uid})
+            response = table.get_item(Key={'id': id})
             return response['Item']
         except ClientError as e:
             raise ValueError(e.response['Error']['Message'])
@@ -26,7 +26,7 @@ class ClaimsRepository:
     def update_claim(self, claim: dict):
         table = self.__db.Table('Claims')
         response = table.update_item(
-            Key={'uid': claim.get('uid')},
+            Key={'id': claim.get('id')},
             UpdateExpression="""
                 set
                     claim_type=:claim_type
@@ -38,9 +38,9 @@ class ClaimsRepository:
         )
         return response
 
-    def delete_claim(self, uid: str):
+    def delete_claim(self, id: str):
         table = self.__db.Table('Claims')
         response = table.delete_item(
-            Key={'uid': uid}
+            Key={'id': id}
         )
         return response

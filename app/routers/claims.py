@@ -20,10 +20,10 @@ class ClaimsRouter:
         def create_claim(claims_model: ClaimsModel):
             return self.__claims_domain.create_claim(claims_model)
 
-        @api_router.get('/claims/{claim_uid}')
-        def get_claim(claim_uid: str):
+        @api_router.get('/claims/{claim_id}')
+        def get_claim(claim_id: str):
             try:
-                return self.__claims_domain.get_claim(claim_uid)
+                return self.__claims_domain.get_claim(claim_id)
             except KeyError:
                 raise HTTPException(status_code=400, detail='No claim found')
 
@@ -31,9 +31,9 @@ class ClaimsRouter:
         def update_claim(claims_model: ClaimsModel):
             return self.__claims_domain.update_claim(claims_model)
 
-        @api_router.delete('/claims/{claim_uid}')
-        def delete_claim(claim_uid: str):
-            return self.__claims_domain.delete_claim(claim_uid)
+        @api_router.delete('/claims/{claim_id}')
+        def delete_claim(claim_id: str):
+            return self.__claims_domain.delete_claim(claim_id)
 
         @api_router.get('/claims')
         def get_all():

@@ -4,13 +4,13 @@ def generate_recipes(ddb):
         TableName='Recipes',
         AttributeDefinitions=[
             {
-                'AttributeName': 'uid',
+                'AttributeName': 'id',
                 'AttributeType': 'S'
             }
         ],
         KeySchema=[
             {
-                'AttributeName': 'uid',
+                'AttributeName': 'id',
                 'KeyType': 'HASH'
             }
         ],
